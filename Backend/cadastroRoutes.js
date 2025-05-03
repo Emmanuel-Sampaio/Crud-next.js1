@@ -12,7 +12,10 @@ router.post('/cadastro', (req, res) => {
   const query = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
   db.run(query, [nome, email, senha], function (err) {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      if (err.message.includes('UNIQUE constraint failed: usuarios.email')) {
+        return res.status(409).json({ error: 'E-mail já cadastrado.' });
+      }
+      return res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
     }
 
     res.status(201).json({ message: 'Usuário cadastrado com sucesso!', id: this.lastID });
