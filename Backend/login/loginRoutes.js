@@ -29,7 +29,8 @@ router.post('/login', (req, res) => {
             }
 
             if (result) {
-                return res.status(200).json({ message: 'Login realizado com sucesso!' });
+                return res.status(200).json({ message: 'Login realizado com sucesso!' ,nome: row.nome   });
+
             } else {
                 return res.status(401).json({ error: 'Senha incorreta.' });
             }

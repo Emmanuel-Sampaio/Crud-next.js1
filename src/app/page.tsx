@@ -20,7 +20,8 @@ export default function Home() {
 
     if (res.ok) {
       alert(data.message);
-      router.push('/pagina-protegida'); 
+      localStorage.setItem('usuarioNome', data.nome);
+      router.push('/Acesso');
     } else {
       alert(data.error);
     }
